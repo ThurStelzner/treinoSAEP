@@ -1,20 +1,4 @@
-import mysql.connector as mysql
-import base64
-
-def conexao():
-    try:
-        return mysql.connect(
-            host = 'localhost',
-            user = 'root',
-            password = '',
-            database = 'pythondb'
-        )
-        print("Conectado!")
-    except Exception as e:
-        print(f"Erro de conexão: {e}")
-
-def criptorafarDado(dado):
-    return base64.b64encode(dado.encode('utf-8')).decode('utf-8')
+from funcoes import conexao, criptorafarDado
 
 def cadastrar():
     try:          
@@ -25,9 +9,11 @@ def cadastrar():
         apelido = input("Digite como gostaria de ser chamado: ")
         senha = input("Digite sua senha: ")
 
+        senhaCripto = criptorafarDado(senha)
+
         sql = "INSERT INTO tb_usuario (nome, senha, apelido) VALUES (%s, %s, %s)"
 
-        cursor.execute(sql, (nome, senha, apelido))
+        cursor.execute(sql, (nome, senhaCripto, apelido))
         conn.commit()
         print("Cadastrado com sucesso!")
 
@@ -37,3 +23,5 @@ def cadastrar():
     finally:
         cursor.close()
         conn.close()
+
+cadastrar()
