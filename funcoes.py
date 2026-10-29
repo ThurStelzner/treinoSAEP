@@ -9,11 +9,10 @@ def conexao():
             password = '',
             database = 'pythondb'
         )
-        print("Conectado!")
     except Exception as e:
         print(f"Erro de conexão: {e}")
 
-def criptorafarDado(dado):
+def criptografarDados(dado):
     return base64.b64encode(dado.encode('utf-8')).decode('utf-8')
 
 def descriptografarDado(dado):
