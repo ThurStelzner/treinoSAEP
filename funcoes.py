@@ -2,15 +2,12 @@ import mysql.connector as mysql
 import base64
 
 def conexao():
-    try:
-        return mysql.connect(
-            host = 'localhost',
-            user = 'root',
-            password = '',
-            database = 'pythondb'
-        )
-    except Exception as e:
-        print(f"Erro de conexão: {e}")
+    return mysql.connect(
+        host = 'localhost',
+        user = 'root',
+        password = '',
+        database = 'pythondb'
+    )
 
 def criptografarDados(dado):
     return base64.b64encode(dado.encode('utf-8')).decode('utf-8')

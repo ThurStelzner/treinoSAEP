@@ -1,6 +1,9 @@
 from funcoes import conexao, criptografarDados
 
 def login():
+    conn = None
+    cursor = None
+    
     try: 
         conn = conexao()
         cursor = conn.cursor(dictionary=True)
@@ -23,8 +26,10 @@ def login():
         print(f"Erro: {e}")
 
     finally:
-        cursor.close()
-        conn.close()
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 if __name__ == "__main__":
     login()

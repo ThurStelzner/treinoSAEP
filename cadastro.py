@@ -2,6 +2,9 @@ from funcoes import conexao, criptografarDados
 import mysql.connector as mysql
 
 def cadastrar():
+    conn = None
+    cursor = None
+
     try:
         conn = conexao()
         cursor = conn.cursor(dictionary=True)
@@ -22,11 +25,13 @@ def cadastrar():
         print("Apelido já cadastrado")
 
     except Exception as e:
-        print(f"Erro inesperado! {e}")
+        print(f"Erro: {e}")
 
     finally:
-        cursor.close()
-        conn.close()
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 if __name__ == "__main__":
     cadastrar()
