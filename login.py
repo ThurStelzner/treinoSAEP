@@ -1,9 +1,9 @@
-from funcoes import conexao, criptografarDados
+from funcoes import conexao, criptografarDados, sessao
 
 def login():
     conn = None
     cursor = None
-    
+
     try: 
         conn = conexao()
         cursor = conn.cursor(dictionary=True)
@@ -18,6 +18,7 @@ def login():
         usuario = cursor.fetchone()
 
         if usuario and senhaCripto == usuario['senha']:
+            sessao['id'] = usuario['id']
             print("Logado!")
         else:
             print("Usuário ou senha incorretos...")        

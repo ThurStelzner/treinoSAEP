@@ -17,3 +17,9 @@ def descriptografarDado(dado):
         return base64.b64decode(dado).decode('utf-8')
     except:
         return dado
+
+sessao = {
+    'id' : None,
+    'apelido' : None,
+    'nome' : None
+}
